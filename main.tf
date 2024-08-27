@@ -39,7 +39,7 @@ resource "aws_instance" "blog" {
   instance_type = var.instance_type
   vpc_security_group_ids = [module.blog_sg.security_group_id]
 
-  subnet_id = module.blog.vpc.public_subnets[0]
+  subnet_id = module.blog_vpc.public_subnets[0]
 
   tags = {
     Name = "Learning Terraform"
@@ -53,7 +53,7 @@ module "blog_sg" {
 
   vpc_id = module.blog_vpc.vpc_id
   name = "blog"
-  
+
   ingress_rules = ["http-80-tcp","https-443-tcp"]
   ingress_cidr_blocks = ["0.0.0.0/0"]
   egress_rules = ["all-all"]
